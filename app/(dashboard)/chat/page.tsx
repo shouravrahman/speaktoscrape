@@ -1,6 +1,6 @@
 'use client';
 import { ChatInterface } from '@/components/chat/ChatInterface';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Bot, Sparkles, MessageSquare, Activity } from 'lucide-react';
 
@@ -132,11 +132,13 @@ export default function ChatPage() {
                   <div className="flex-1 container mx-auto px-0 sm:px-0 lg:px-0 py-0 min-h-0">
                      <div className="h-full max-w-4xl mx-auto">
                         <div className="h-full rounded-2xl border border-border/50 bg-card/30 backdrop-blur-sm shadow-xl shadow-black/5 overflow-hidden">
+                          <Suspense fallback={<div>Loading...</div>}>
                            <ChatInterface
                               initialMessages={initialMessages}
                               chatId={chatId || null}
                               onNewChatCreated={handleNewChatCreated}
                            />
+                          </Suspense>
                         </div>
                      </div>
                   </div>

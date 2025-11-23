@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, use } from 'react';
+import { useEffect, useState, use, Suspense } from 'react';
 import { ChatInterface } from '@/components/chat/ChatInterface';
 import { toast } from 'sonner';
 
@@ -58,7 +58,9 @@ export default function ChatPage(props: { params: Promise<{ id: string }> }) {
 
    return (
       <div className="flex flex-col h-full">
-         <ChatInterface initialMessages={messages} chatId={chatId} />
+         <Suspense fallback={<div>Loading...</div>}>
+            <ChatInterface initialMessages={messages} chatId={chatId} />
+         </Suspense>
       </div>
    );
 }
